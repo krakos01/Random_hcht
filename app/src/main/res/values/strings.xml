@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Random hcht</string>
+
+    <!-- Cars names -->
+    <string name="Cruiser">Cruiser</string>
+    <string name="Infinity">Infinity</string>
+    <string name="Rookie">Rookie</string>
+    <string name="Bliss">Bliss</string>
+    <string name="Legend">Legend</string>
+    <string name="Orient">Orient</string>
+    <string name="Cable_Guy">Cable Guy</string>
+    <string name="Dynamite">Dynamite</string>
+    <string name="Specter">Specter</string>
+    <string name="Dustdriver">Dustdriver</string>
+    <string name="Loveride">Loveride</string>
+    <string name="Westbound">Westbound</string>
+    <string name="Deja_Vu">Déjà Vu</string>
+    <string name="Janis">Janis</string>
+    <string name="Fancy_Grey">Fancy Grey</string>
+    <string name="Crimson_Chief">Crimson Chief</string>
+    <string name="Madbot">Madbot</string>
+    <string name="Haze">Haze</string>
+    <string name="Zeus">Zeus</string>
+    <string name="Macchina">Macchina</string>
+    <string name="Royal">Royal</string>
+    <string name="Twilight">Twilight</string>
+    <string name="Fury">Fury</string>
+    <string name="Nano">Nano</string>
+    <string name="Walker_X">Walker-X</string>
+    <string name="Elite_275">Elite 275</string>
+    <string name="Gentleman">Gentleman</string>
+    <string name="Lightning">Lightning</string>
+    <string name="Night_Rider">Night Rider</string>
+    <string name="Ladybug">Ladybug</string>
+    <string name="Explorer">Explorer</string>
+    <string name="The_Fuzz">The Fuzz</string>
+    <string name="François">François</string>
+    <string name="Minuano">Minuano</string>
+</resources>
