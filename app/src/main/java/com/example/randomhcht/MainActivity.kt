@@ -4,18 +4,28 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Alignment.Companion.CenterVertically
+import androidx.compose.ui.Alignment.Companion.Start
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.randomhcht.data.Datasource
 import com.example.randomhcht.model.Car
+import com.example.randomhcht.model.Country
 import com.example.randomhcht.model.Track
+import com.example.randomhcht.ui.GameScreen
 import com.example.randomhcht.ui.theme.RandomHchtTheme
 
 class MainActivity : ComponentActivity() {
@@ -39,11 +49,11 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun RandomHchtApp() {
     RandomHchtTheme {
-        Tournament()
+        GameScreen()
     }
 }
 
-
+/*
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CarItem(modifier: Modifier = Modifier, car: Car) {
@@ -64,29 +74,28 @@ fun CarItem(modifier: Modifier = Modifier, car: Car) {
     }
 }
 
+ */
 
+/*
 @Composable
 fun Tournament(modifier: Modifier = Modifier) {
-    val tracks = drawTracksNormally(2)
+    var tracks: List<Track> = drawTracksNormally(2)
     val raceID = 1
     val playerOneCars: MutableList<Car> = mutableListOf(Car(1,R.string.Cruiser,R.drawable.cruiser))
     val playerTwoCars: MutableList<Car> = mutableListOf(Car(1,R.string.Cruiser,R.drawable.cruiser))
 
     Column() {
         // Displays track name
-        Text(
-            text = stringResource(tracks[raceID].trackName),
-            style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier.align(CenterHorizontally)
-        )
-        Spacer(modifier = Modifier.height(8.dp))
+        TrackInformation(track = tracks[raceID], raceID = raceID)
+        Spacer(modifier = Modifier.height(4.dp))
 
         // Displays two cars in a row
         DrawCarsNormally(p1Cars = playerOneCars, p2Cars = playerTwoCars)
-
     }
 }
+*/
 
+/*
 @Composable
 fun DrawCarsNormally(
     modifier: Modifier = Modifier,
@@ -102,7 +111,9 @@ fun DrawCarsNormally(
     Row(Modifier.padding(horizontal = 4.dp)) {
         CarItem (
             car = newCar1,
-            modifier = modifier.weight(1f),
+            modifier = modifier
+                .weight(1f)
+                .clickable { }
         )
         Spacer(modifier = Modifier.width(4.dp))
         CarItem(
@@ -114,9 +125,9 @@ fun DrawCarsNormally(
     // Button to Tournament composable?
     Button(
         onClick = {
-            p1Cars.add(Datasource().LoadCars().random())
+            p1Cars.add(Datasource().Cars.random())
             newCar1 = p1Cars.last()
-            p2Cars.add(Datasource().LoadCars().random())
+            p2Cars.add(Datasource().Cars.random())
             newCar2 = p2Cars.last()
 
         }) {
@@ -124,9 +135,61 @@ fun DrawCarsNormally(
     }
 }
 
+ */
 
+/*
 // Normally - random tracks from random countries
-@Composable
 fun drawTracksNormally(numberOfRaces: Int) : List<Track>{
-    return Datasource().LoadTracks().asSequence().shuffled().take(numberOfRaces).toList()
+    return Datasource().Tracks.asSequence().shuffled().take(numberOfRaces).toList()
 }
+
+ */
+
+/*
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TrackInformation(modifier: Modifier = Modifier, track: Track, raceID: Int) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(50.dp)
+            .padding(4.dp)
+    ) {
+        Row(modifier
+            .padding(horizontal = 8.dp)
+        ) {
+            val countryFlag = when(track.Country) {
+                Country.USA -> R.drawable.usa
+                Country.CHILE -> R.drawable.chile
+                Country.BRAZIL -> R.drawable.brazil
+                Country.SOUTH_AFRICA -> R.drawable.south_africa
+                Country.GREECE -> R.drawable.greece
+                Country.ICELAND -> R.drawable.iceland
+                Country.UAE -> R.drawable.uae
+                Country.INDIA -> R.drawable.india
+                Country.AUSTRALIA -> R.drawable.australia
+                Country.CHINA -> R.drawable.china
+                Country.JAPAN -> R.drawable.japan
+                Country.HAWAII -> R.drawable.hawaii
+            }
+
+            Image(
+                modifier = modifier
+                    .size(40.dp)
+                    .padding(end = 8.dp),
+                painter = painterResource(countryFlag),
+                contentDescription = track.Country.toString(),
+            )
+
+            Text(
+                modifier = Modifier.align(CenterVertically),
+                text = track.IdInCountry.toString() + " - " + stringResource(track.trackName),
+                style = MaterialTheme.typography.headlineSmall,
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.SemiBold,
+            )
+        }
+    }
+}
+
+ */
