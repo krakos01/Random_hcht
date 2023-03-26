@@ -6,8 +6,7 @@ import com.example.randomhcht.model.Country
 import com.example.randomhcht.model.Track
 
 class Datasource() {
-    fun LoadCars(): List<Car> {
-        return listOf(
+    val Cars: List<Car> = listOf(
             Car(1, R.string.Cruiser, R.drawable.cruiser),
             Car(2, R.string.Infinity, R.drawable.infinity),
             Car(3, R.string.Rookie, R.drawable.rookie, slow = true),
@@ -43,11 +42,10 @@ class Datasource() {
             Car(33, R.string.François, R.drawable.francois),
             Car(34, R.string.Minuano, R.drawable.minuano)
         )
-    }
 
-    fun LoadTracks(): List<Track> {
-        return listOf(
-            Track(1,1,R.string.Grass_Hills,Country.USA),
+
+    val Tracks: List<Track> = listOf(
+        Track(1,1,R.string.Grass_Hills,Country.USA),
             Track(2,2,R.string.Rocky_Road,Country.USA),
             Track(3,3,R.string.Sunset,Country.USA),
             Track(4,4,R.string.Morning_Walk,Country.USA),
@@ -159,5 +157,4 @@ class Datasource() {
             Track(110,8,R.string.Ashes,Country.HAWAII),
             Track(111,9,R.string.Final_Challenge,Country.HAWAII),
         )
-    }
 }
