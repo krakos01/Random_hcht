@@ -5,6 +5,8 @@ import com.example.randomhcht.model.Car
 import com.example.randomhcht.model.Country
 import com.example.randomhcht.model.Track
 
+const val NO_OF_RACES = 10
+
 class Datasource() {
     val Cars: List<Car> = listOf(
             Car(1, R.string.Cruiser, R.drawable.cruiser),
