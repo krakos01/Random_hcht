@@ -22,10 +22,10 @@ class AppViewModel : ViewModel() {
     private val tracks: List<Track> = Datasource().Tracks.asSequence().shuffled().take(NO_OF_RACES).toList()
 
 
+
     init {
         resetApp()
     }
-
 
     // Function draws cars for both players.
     // If redraw==true then draws new car until gets one that wasn't used is drawn and returns it.

@@ -190,11 +190,7 @@ private fun FinishDialog(
     val activity = (LocalContext.current as Activity)
 
     AlertDialog(
-        onDismissRequest = {
-            // Dismiss the dialog when the user clicks outside the dialog or on the back
-            // button. If you want to disable that functionality, simply use an empty
-            // onCloseRequest.
-        },
+        onDismissRequest = { },
         title = { Text(text = "FINISH") },
         // text = { Text(stringResource(R.string.you_scored, score)) },
         modifier = modifier,
