@@ -1,13 +1,18 @@
 package com.example.randomhcht.ui
 
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -23,6 +28,16 @@ import com.example.randomhcht.model.Country
 import com.example.randomhcht.model.Track
 import com.example.randomhcht.ui.theme.RandomHchtTheme
 
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun GameScreenPreview() {
+    RandomHchtTheme {
+        GameScreen()
+    }
+}
+
+
 @Composable
 fun GameScreen(
     modifier: Modifier = Modifier,
@@ -30,7 +45,7 @@ fun GameScreen(
 ) {
     val appUiState by appViewModel.uiState.collectAsState()
 
-    Column() {
+    Column {
 
         DisplayTrackInformation(
             track = appUiState.currentTrack,
@@ -39,14 +54,22 @@ fun GameScreen(
         Spacer(modifier = Modifier.height(10.dp))
         DisplayCars(
             p1Car = appUiState.currentP1Car,
-            p2Car = appUiState.currentP2Car
+            p2Car = appUiState.currentP2Car,
+            modifier = Modifier
+                .weight(1f)
         )
         Spacer(modifier = Modifier.weight(1f))
         DrawAgainAndNextRaceButtons(
             { appViewModel.drawCars(redraw = true) },
-            { appViewModel.nextRace() }
+            { appViewModel.nextRace() },
+            modifier = modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally)
         )
 
+        if (appUiState.isGameOver) {
+            FinishDialog(onPlayAgain = { appViewModel.resetApp() })
+        }
     }
 }
 
@@ -101,18 +124,12 @@ fun DisplayTrackInformation(modifier: Modifier = Modifier, track: Track, raceNo:
     }
 }
 
-
 @Composable
-fun DisplayCars(
-    modifier: Modifier = Modifier,
-    p1Car: Car,
-    p2Car: Car
-) {
-
+fun DisplayCars(modifier: Modifier = Modifier, p1Car: Car, p2Car: Car) {
     Row(Modifier.padding(horizontal = 4.dp)) {
-        CarCard(car = p1Car, modifier = modifier.weight(1f))
+        CarCard(car = p1Car,modifier = modifier)
         Spacer(modifier = Modifier.width(4.dp))
-        CarCard(car = p2Car, modifier = modifier.weight(1f))
+        CarCard(car = p2Car, modifier = modifier)
     }
 }
 
@@ -123,8 +140,14 @@ fun CarCard(modifier: Modifier = Modifier, car: Car) {
     Card(
         modifier = modifier
     ) {
-        Column() {
-            Image(painter = painterResource(car.icon), contentDescription = "Car icon")
+        Column {
+            Image(
+                painter = painterResource(car.icon),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(100.dp),
+                contentScale = ContentScale.Crop,
+                contentDescription = "Car icon")
             Text(
                 text = car.ID.toString() + " - " +stringResource(car.name),
                 textAlign = TextAlign.Center,
@@ -137,26 +160,57 @@ fun CarCard(modifier: Modifier = Modifier, car: Car) {
 }
 
 
-@Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun GameScreenPreview() {
-    RandomHchtTheme() {
-        GameScreen()
+fun DrawAgainAndNextRaceButtons(onDrawAgain: () -> Unit, onNextRace: () -> Unit, modifier: Modifier = Modifier) {
+    Column(
+    ) {
+        Button(
+            onClick = onDrawAgain,
+            colors = ButtonDefaults.buttonColors(Color(255,190,65)),
+            modifier = modifier
+        ) {
+            Text(text = "Draw again")
+        }
+        Button(
+            onClick =  onNextRace,
+            colors = ButtonDefaults.buttonColors(Color(255,190,65)),
+            modifier = modifier
+        ) {
+            Text(text = "Next race")
+        }
     }
 }
 
 
 @Composable
-fun DrawAgainAndNextRaceButtons(
-    onDrawAgain: () -> Unit,
-    onNextRace: () -> Unit
+private fun FinishDialog(
+    onPlayAgain: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    Row() {
-        Button(onClick = onDrawAgain) {
-            Text(text = "Draw again")
+    val activity = (LocalContext.current as Activity)
+
+    AlertDialog(
+        onDismissRequest = {
+            // Dismiss the dialog when the user clicks outside the dialog or on the back
+            // button. If you want to disable that functionality, simply use an empty
+            // onCloseRequest.
+        },
+        title = { Text(text = "FINISH") },
+        // text = { Text(stringResource(R.string.you_scored, score)) },
+        modifier = modifier,
+        dismissButton = {
+            TextButton(
+                onClick = {
+                    activity.finish()
+                }
+            ) {
+                Text(text = "Exit")
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onPlayAgain) {
+                Text(text = "Play again")
+            }
         }
-        Button(onClick =  onNextRace  ) {
-            Text(text = "Next race")
-        }
-    }
+    )
 }
