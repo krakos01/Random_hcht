@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "928476617030",
+    "project_id": "random-races-for-hct",
+    "storage_bucket": "random-races-for-hct.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:928476617030:android:04f26614363a7fa50aed47",
+        "android_client_info": {
+          "package_name": "com.example.randomhcht"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "928476617030-0tdbl34g09skqkq8ed7abg57u3mi1nd0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvKKBaZmhJN6gK2HziMfkjnAiXQSrKjyc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "928476617030-0tdbl34g09skqkq8ed7abg57u3mi1nd0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

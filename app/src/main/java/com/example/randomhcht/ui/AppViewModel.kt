@@ -22,6 +22,10 @@ class AppViewModel : ViewModel() {
     private val tracks: List<Track> = Datasource().Tracks.asSequence().shuffled().take(NO_OF_RACES).toList()
 
 
+    init {
+        resetApp()
+    }
+
 
     // Function draws cars for both players.
     // If redraw==true then draws new car until gets one that wasn't used is drawn and returns it.
@@ -30,9 +34,6 @@ class AppViewModel : ViewModel() {
         withRepetitions: Boolean = false,
         redraw: Boolean = false
     ) {
-        // if (redraw && previousP1Cars.isNotEmpty()) previousP1Cars.removeLast()
-        // if (redraw && previousP2Cars.isNotEmpty()) previousP2Cars.removeLast()
-
         var car = Datasource().Cars.random()
         var car2 = Datasource().Cars.random()
 
@@ -58,7 +59,9 @@ class AppViewModel : ViewModel() {
 
     fun nextRace() {
         if (previousP1Cars.size == NO_OF_RACES) {
-
+            _uiState.update { currentState ->
+                currentState.copy(isGameOver = true)
+            }
         }
         else {
             _uiState.update { currentState ->
@@ -67,11 +70,17 @@ class AppViewModel : ViewModel() {
                     currentTrack = tracks[currentState.currentRace]
                 )
             }
-
             drawCars()
         }
     }
 
+
+    fun resetApp() {
+        previousP1Cars.clear()
+        previousP2Cars.clear()
+        _uiState.value = AppUiState(currentRace = 1)
+        drawCars()
+    }
 
 
 }
