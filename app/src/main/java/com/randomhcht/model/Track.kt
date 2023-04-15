@@ -1,4 +1,4 @@
-package com.example.randomhcht.model
+package com.randomhcht.model
 
 import androidx.annotation.StringRes
 

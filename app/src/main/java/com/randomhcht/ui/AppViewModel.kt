@@ -1,10 +1,10 @@
-package com.example.randomhcht.ui
+package com.randomhcht.ui
 
 import androidx.lifecycle.ViewModel
-import com.example.randomhcht.data.Datasource
-import com.example.randomhcht.data.NO_OF_RACES
-import com.example.randomhcht.model.Car
-import com.example.randomhcht.model.Track
+import com.randomhcht.data.Datasource
+import com.randomhcht.data.NO_OF_RACES
+import com.randomhcht.model.Car
+import com.randomhcht.model.Track
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

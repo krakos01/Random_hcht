@@ -1,8 +1,8 @@
-package com.example.randomhcht.ui
+package com.randomhcht.ui
 
-import com.example.randomhcht.data.Datasource
-import com.example.randomhcht.model.Car
-import com.example.randomhcht.model.Track
+import com.randomhcht.data.Datasource
+import com.randomhcht.model.Car
+import com.randomhcht.model.Track
 
 data class AppUiState(
     val currentRace: Int = 0,

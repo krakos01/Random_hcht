@@ -1,4 +1,4 @@
-package com.example.randomhcht.ui
+package com.randomhcht.ui
 
 import android.app.Activity
 import androidx.compose.foundation.Image
@@ -23,10 +23,10 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.randomhcht.*
 import com.example.randomhcht.R
-import com.example.randomhcht.model.Car
-import com.example.randomhcht.model.Country
-import com.example.randomhcht.model.Track
-import com.example.randomhcht.ui.theme.RandomHchtTheme
+import com.randomhcht.model.Car
+import com.randomhcht.model.Country
+import com.randomhcht.model.Track
+import com.randomhcht.ui.theme.RandomHchtTheme
 
 
 @Preview(showBackground = true, showSystemUi = true)
@@ -190,9 +190,8 @@ private fun FinishDialog(
     val activity = (LocalContext.current as Activity)
 
     AlertDialog(
-        onDismissRequest = { },
+        onDismissRequest = {  },
         title = { Text(text = "FINISH") },
-        // text = { Text(stringResource(R.string.you_scored, score)) },
         modifier = modifier,
         dismissButton = {
             TextButton(

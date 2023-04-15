@@ -1,4 +1,4 @@
-package com.example.randomhcht
+package com.randomhcht
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,8 +9,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.randomhcht.ui.GameScreen
-import com.example.randomhcht.ui.theme.RandomHchtTheme
+import com.randomhcht.ui.GameScreen
+import com.randomhcht.ui.theme.RandomHchtTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

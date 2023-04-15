@@ -1,4 +1,4 @@
-package com.example.randomhcht.ui.theme
+package com.randomhcht.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
