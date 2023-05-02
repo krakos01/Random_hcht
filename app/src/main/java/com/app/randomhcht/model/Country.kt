@@ -1,4 +1,4 @@
-package com.randomhcht.model
+package com.app.randomhcht.model
 
 enum class Country {
     USA,

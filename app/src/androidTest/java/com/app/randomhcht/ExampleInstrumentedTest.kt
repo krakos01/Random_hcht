@@ -1,4 +1,4 @@
-package com.example.randomhcht
+package com.app.randomhcht
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

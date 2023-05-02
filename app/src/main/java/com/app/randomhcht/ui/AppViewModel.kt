@@ -1,10 +1,10 @@
-package com.randomhcht.ui
+package com.app.randomhcht.ui
 
 import androidx.lifecycle.ViewModel
-import com.randomhcht.data.Datasource
-import com.randomhcht.data.NO_OF_RACES
-import com.randomhcht.model.Car
-import com.randomhcht.model.Track
+import com.app.randomhcht.data.Datasource
+import com.app.randomhcht.data.NO_OF_RACES
+import com.app.randomhcht.model.Car
+import com.app.randomhcht.model.Track
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -19,9 +19,7 @@ class AppViewModel : ViewModel() {
     private var previousP2Cars: MutableList<Car> = mutableListOf()
 
     // List of 10 random, shuffled tracks
-    private val tracks: List<Track> = Datasource().Tracks.asSequence().shuffled().take(NO_OF_RACES).toList()
-
-
+    private val tracks: List<Track> = Datasource().tracks.asSequence().shuffled().take(NO_OF_RACES).toList()
 
     init {
         resetApp()
@@ -34,14 +32,14 @@ class AppViewModel : ViewModel() {
         withRepetitions: Boolean = false,
         redraw: Boolean = false
     ) {
-        var car = Datasource().Cars.random()
-        var car2 = Datasource().Cars.random()
+        var car = Datasource().cars.random()
+        var car2 = Datasource().cars.random()
 
         if (!withRepetitions) {
             while (previousP1Cars.contains(car))
-                car = Datasource().Cars.random()
+                car = Datasource().cars.random()
             while (previousP2Cars.contains(car2))
-                car2 = Datasource().Cars.random()
+                car2 = Datasource().cars.random()
         }
 
         if (!redraw) {
@@ -80,6 +78,7 @@ class AppViewModel : ViewModel() {
         previousP2Cars.clear()
         _uiState.value = AppUiState(currentRace = 1)
         drawCars()
+        //Datasource().swapCarsIds(1,2)
     }
 
 

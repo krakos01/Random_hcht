@@ -1,4 +1,4 @@
-package com.example.randomhcht
+package com.app.randomhcht
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.randomhcht.ui.theme
+package com.app.randomhcht.ui.theme
 
 import android.app.Activity
 import android.os.Build

@@ -1,10 +1,10 @@
-package com.randomhcht.model
+package com.app.randomhcht.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
 data class Car(
-    val ID: Int,
+    var ID: Int,
     @StringRes val name: Int,
     @DrawableRes val icon: Int,
     val slow: Boolean = false,

@@ -1,4 +1,4 @@
-package com.randomhcht.ui
+package com.app.randomhcht.ui
 
 import android.app.Activity
 import androidx.compose.foundation.Image
@@ -23,10 +23,10 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.randomhcht.*
 import com.example.randomhcht.R
-import com.randomhcht.model.Car
-import com.randomhcht.model.Country
-import com.randomhcht.model.Track
-import com.randomhcht.ui.theme.RandomHchtTheme
+import com.app.randomhcht.model.Car
+import com.app.randomhcht.model.Country
+import com.app.randomhcht.model.Track
+import com.app.randomhcht.ui.theme.RandomHchtTheme
 
 
 @Preview(showBackground = true, showSystemUi = true)
@@ -178,6 +178,7 @@ fun DrawAgainAndNextRaceButtons(onDrawAgain: () -> Unit, onNextRace: () -> Unit,
         ) {
             Text(text = "Next race")
         }
+        Spacer(modifier = Modifier.height(5.dp))
     }
 }
 
