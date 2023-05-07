@@ -56,16 +56,18 @@ class AppViewModel : ViewModel() {
 
 
     fun nextRace() {
-        if (previousP1Cars.size == NO_OF_RACES) {
+        if (_uiState.value.numberOfPreviousCars == NO_OF_RACES-1) {
             _uiState.update { currentState ->
                 currentState.copy(isGameOver = true)
             }
+            // Log.i("nextRacesLog","Finished with "+_uiState.value.isGameOver)
         }
         else {
             _uiState.update { currentState ->
                 currentState.copy(
                     currentRace = currentState.currentRace.inc(),
-                    currentTrack = tracks[currentState.currentRace]
+                    currentTrack = tracks[currentState.currentRace],
+                    numberOfPreviousCars = currentState.numberOfPreviousCars.inc()
                 )
             }
             drawCars()

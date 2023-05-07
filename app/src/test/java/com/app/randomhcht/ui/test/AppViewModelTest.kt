@@ -1,5 +1,7 @@
 package com.app.randomhcht.ui.test
 
+import com.app.randomhcht.data.NO_OF_RACES
+import com.app.randomhcht.ui.AppUiState
 import com.app.randomhcht.ui.AppViewModel
 import org.junit.Assert.*
 import org.junit.Test
@@ -53,5 +55,23 @@ class AppViewModelTest {
         assertFalse(appUiState.isGameOver)
     }
 
-    // todo Boundary tests
+    @Test
+    fun appViewModel_AllRacesDone_UiStateUpdatedCorrectly() {
+        var currentAppUiState: AppUiState
+        var expectedNumberOfRaces = 1
+
+        repeat(NO_OF_RACES) {
+            currentAppUiState = viewModel.uiState.value
+
+            // Assert that after each "Next Race" button number of races is updated
+            assertEquals(expectedNumberOfRaces, currentAppUiState.currentRace)
+
+            viewModel.nextRace()
+            expectedNumberOfRaces++
+        }
+        currentAppUiState = viewModel.uiState.value
+
+        assertEquals(currentAppUiState.currentRace, NO_OF_RACES)
+        assertTrue(currentAppUiState.isGameOver)
+    }
 }

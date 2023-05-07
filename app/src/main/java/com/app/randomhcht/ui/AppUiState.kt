@@ -10,6 +10,7 @@ data class AppUiState(
     val currentTrack: Track = Datasource().tracks[currentRace],
     val currentP1Car: Car = Datasource().cars[0],
     val currentP2Car: Car = Datasource().cars[30],
-    val isGameOver: Boolean = false
+    val isGameOver: Boolean = false,
+    val numberOfPreviousCars: Int = 0
     // todo Add previous cars list here maybe?
 )
