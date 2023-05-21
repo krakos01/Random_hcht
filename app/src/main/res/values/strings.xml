@@ -152,4 +152,20 @@
     <string name = "Ashes">Ashes</string>
     <string name = "Final_Challenge">Final Challenge</string>
 
+    <string name = "Tracks">Tracks</string>
+    <string name = "Cars">Cars</string>
+    <string name = "Races">Races</string>
+
+    <string name="SameNumber">Equal number of tracks from each country</string>
+    <string name="NoMore">No more than X tracks from each country</string>
+    <string name="DisableCountries">Disable selected countries</string>
+
+    <string name="DisableSlow">Disable slow cars</string>
+    <string name="DisableSlowMore">(Ladybug, Rookie, etc.)</string>
+    <string name="DisableFast">Disable fast cars</string>
+    <string name="DisableFastMore">(Zeus, Haze, etc.)</string>
+    <string name="DisableNormal">Disable normal cars</string>
+    <string name="DisableNormalMore">(Not slow and not fast, like Cruiser)</string>
+
+    <string name="NumberOfRaces">Number of races: </string>
 </resources>

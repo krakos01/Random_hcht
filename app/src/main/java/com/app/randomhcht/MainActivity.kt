@@ -9,7 +9,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.app.randomhcht.ui.GameScreen
 import com.app.randomhcht.ui.theme.RandomHchtTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +21,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    RandomHchtApp()
+                    App()
                 }
             }
         }
@@ -31,8 +30,8 @@ class MainActivity : ComponentActivity() {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun RandomHchtApp() {
+fun App() {
     RandomHchtTheme {
-        GameScreen()
+        RandomHchtApp()
     }
 }

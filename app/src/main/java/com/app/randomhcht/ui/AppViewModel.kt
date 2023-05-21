@@ -2,6 +2,7 @@ package com.app.randomhcht.ui
 
 import androidx.lifecycle.ViewModel
 import com.app.randomhcht.data.Datasource
+import com.app.randomhcht.data.Datasource.cars
 import com.app.randomhcht.data.NO_OF_RACES
 import com.app.randomhcht.model.Car
 import com.app.randomhcht.model.Track
@@ -19,7 +20,7 @@ class AppViewModel : ViewModel() {
     private var previousP2Cars: MutableList<Car> = mutableListOf()
 
     // List of 10 random, shuffled tracks
-    private val tracks: List<Track> = Datasource().tracks.asSequence().shuffled().take(NO_OF_RACES).toList()
+    private val tracks: List<Track> = Datasource.tracks.asSequence().shuffled().take(NO_OF_RACES).toList()
 
     init {
         resetApp()
@@ -32,14 +33,14 @@ class AppViewModel : ViewModel() {
         withRepetitions: Boolean = false,
         redraw: Boolean = false
     ) {
-        var car = Datasource().cars.random()
-        var car2 = Datasource().cars.random()
+        var car = cars.random()
+        var car2 = cars.random()
 
         if (!withRepetitions) {
             while (previousP1Cars.contains(car))
-                car = Datasource().cars.random()
+                car = cars.random()
             while (previousP2Cars.contains(car2))
-                car2 = Datasource().cars.random()
+                car2 = cars.random()
         }
 
         if (!redraw) {

@@ -1,5 +1,6 @@
 package com.app.randomhcht.data
 
+import androidx.annotation.StringRes
 import com.example.randomhcht.R
 import com.app.randomhcht.model.Car
 import com.app.randomhcht.model.Country
@@ -7,7 +8,22 @@ import com.app.randomhcht.model.Track
 
 var NO_OF_RACES = 10
 
-class Datasource() {
+object Datasource {
+
+    val trackOptions = listOf (
+        R.string.SameNumber,
+        R.string.NoMore,
+        R.string.DisableCountries,
+    )
+
+    val carOptions = listOf(
+        Pair(R.string.DisableSlow, R.string.DisableSlowMore),
+        Pair(R.string.DisableFast, R.string.DisableFastMore),
+        Pair(R.string.DisableNormal, R.string.DisableNormalMore)
+    )
+
+
+
     val cars: List<Car> = mutableListOf(
         Car(1, R.string.Cruiser, R.drawable.cruiser),
         Car(2, R.string.Infinity, R.drawable.infinity),

@@ -2,6 +2,7 @@ package com.app.randomhcht.ui
 
 import android.app.Activity
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -31,25 +32,26 @@ import com.app.randomhcht.ui.theme.RandomHchtTheme
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun GameScreenPreview() {
+fun MainScreenPreview() {
     RandomHchtTheme {
-        GameScreen()
+        MainScreen(onOptionsButtonClicked = {})
     }
 }
 
 
 @Composable
-fun GameScreen(
+fun MainScreen(
     modifier: Modifier = Modifier,
-    appViewModel: AppViewModel = viewModel()
+    appViewModel: AppViewModel = viewModel(),
+    onOptionsButtonClicked: () -> Unit
 ) {
     val appUiState by appViewModel.uiState.collectAsState()
 
     Column {
-
         DisplayTrackInformation(
             track = appUiState.currentTrack,
-            raceNo = appUiState.currentRace
+            raceNo = appUiState.currentRace,
+            onClick = onOptionsButtonClicked
         )
         Spacer(modifier = Modifier.height(10.dp))
         DisplayCars(
@@ -60,12 +62,13 @@ fun GameScreen(
         )
         Spacer(modifier = Modifier.weight(1f))
         DrawAgainAndNextRaceButtons(
-            { appViewModel.drawCars(redraw = true) },
-            { appViewModel.nextRace() },
+            onDrawAgain = { appViewModel.drawCars(redraw = true) },
+            onNextRace = { appViewModel.nextRace() },
             modifier = modifier
                 .fillMaxWidth()
-                .align(Alignment.CenterHorizontally)
+                .align(Alignment.CenterHorizontally),
         )
+
 
         if (appUiState.isGameOver) {
             FinishDialog(onPlayAgain = { appViewModel.resetApp() })
@@ -74,9 +77,13 @@ fun GameScreen(
 }
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DisplayTrackInformation(modifier: Modifier = Modifier, track: Track, raceNo: Int) {
+fun DisplayTrackInformation(
+    modifier: Modifier = Modifier,
+    track: Track,
+    raceNo: Int,
+    onClick: () -> Unit
+) {
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -104,9 +111,10 @@ fun DisplayTrackInformation(modifier: Modifier = Modifier, track: Track, raceNo:
             Image(
                 modifier = modifier
                     .size(40.dp)
-                    .padding(end = 8.dp),
+                    .padding(end = 8.dp)
+                    .clickable { onClick.invoke() },
                 painter = painterResource(countryFlag),
-                contentDescription = track.Country.toString(),
+                contentDescription = track.Country.toString()
             )
             Text(
                 modifier = Modifier.align(CenterVertically),
