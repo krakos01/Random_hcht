@@ -166,6 +166,7 @@
     <string name="DisableFastMore">(Zeus, Haze, etc.)</string>
     <string name="DisableNormal">Disable normal cars</string>
     <string name="DisableNormalMore">(Not slow and not fast, like Cruiser)</string>
+    <string name="DisableSummerCar">Disable summer car</string>
 
     <string name="NumberOfRaces">Number of races: </string>
 </resources>

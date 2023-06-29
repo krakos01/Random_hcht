@@ -1,12 +1,21 @@
 package com.app.randomhcht.data
 
-import androidx.annotation.StringRes
 import com.example.randomhcht.R
 import com.app.randomhcht.model.Car
 import com.app.randomhcht.model.Country
 import com.app.randomhcht.model.Track
 
-var NO_OF_RACES = 10
+// 0 -> Disable Slow
+// 1 -> Disable Fast
+// 2 -> Disable Normal
+val carDrawOptions = mutableMapOf(0 to false, 1 to false, 2 to false)
+
+
+// Track drawing options
+var equalNumberOfRacesFromEachCountry = false
+var limitOfTracksInEachCountry = 0 // 0 = no limit
+var countriesToDisable: List<Country>? = null
+
 
 object Datasource {
 
@@ -17,11 +26,11 @@ object Datasource {
     )
 
     val carOptions = listOf(
-        Pair(R.string.DisableSlow, R.string.DisableSlowMore),
-        Pair(R.string.DisableFast, R.string.DisableFastMore),
-        Pair(R.string.DisableNormal, R.string.DisableNormalMore)
+        Pair(R.string.DisableSlow, "slow"),
+        Pair(R.string.DisableFast, "fast"),
+        Pair(R.string.DisableNormal, "normal"),
+    //  Pair(R.string.DisableSummerCar, "summer")
     )
-
 
 
     val cars: List<Car> = mutableListOf(
@@ -61,11 +70,6 @@ object Datasource {
         Car(34, R.string.The_Fuzz, R.drawable.thefuzz),
         // TODO Add 35th car from summer addon
     )
-
-    fun setNumberOfRaces(newNoOfRaces: Int) {
-        NO_OF_RACES = newNoOfRaces
-    }
-
 
     fun swapCarsIds(car: Car, newId: Int) {
         if (newId in 0..35) {

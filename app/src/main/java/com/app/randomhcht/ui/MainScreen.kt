@@ -142,7 +142,6 @@ fun DisplayCars(modifier: Modifier = Modifier, p1Car: Car, p2Car: Car) {
 }
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CarCard(modifier: Modifier = Modifier, car: Car) {
     Card(
@@ -180,7 +179,7 @@ fun DrawAgainAndNextRaceButtons(onDrawAgain: () -> Unit, onNextRace: () -> Unit,
             Text(text = "Draw again")
         }
         Button(
-            onClick =  onNextRace,
+            onClick = onNextRace,
             colors = ButtonDefaults.buttonColors(Color(255,190,65)),
             modifier = modifier
         ) {
@@ -212,9 +211,7 @@ private fun FinishDialog(
             }
         },
         confirmButton = {
-            TextButton(onClick = onPlayAgain) {
-                Text(text = "Play again")
-            }
+            TextButton(onClick = onPlayAgain) { Text(text = "Play again") }
         }
     )
 }
