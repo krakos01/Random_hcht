@@ -22,7 +22,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.randomhcht.*
 import com.example.randomhcht.R
 import com.app.randomhcht.model.Car
 import com.app.randomhcht.model.Country
@@ -169,8 +168,7 @@ fun CarCard(modifier: Modifier = Modifier, car: Car) {
 
 @Composable
 fun DrawAgainAndNextRaceButtons(onDrawAgain: () -> Unit, onNextRace: () -> Unit, modifier: Modifier = Modifier) {
-    Column(
-    ) {
+    Column {
         Button(
             onClick = onDrawAgain,
             colors = ButtonDefaults.buttonColors(Color(255,190,65)),
