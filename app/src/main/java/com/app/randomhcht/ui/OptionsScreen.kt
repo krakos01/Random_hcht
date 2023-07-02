@@ -49,10 +49,6 @@ fun OptionsScreen(
     onDoneButtonClickedAndDifferentNumberOfRaces: () -> Unit = {},
     onDisableCountriesClicked: () -> Unit = {},
 ) {
-    val trackOptionChanged = remember { mutableStateOf(false) }
-    val raceOptionChanged = remember { mutableStateOf(false) }
-    val onTrackOptionChanged = { trackOptionChanged.value = true }
-    val onRaceOptionChanged = { raceOptionChanged.value = true }
     val showDialog = remember { mutableStateOf(false) }
     val hideDialog = { showDialog.value = false}
     val previousNumberOfRaces = appViewModel.getPreviousNumberOfRaces()
@@ -64,7 +60,7 @@ fun OptionsScreen(
         Spacer(Modifier.height(5.dp))
 
         /* TRACKS */
-        DisplayTrackOptions(onDisableCountriesClicked, onTrackOptionChanged, appViewModel)
+        DisplayTrackOptions(onDisableCountriesClicked)
         Divider()
         Spacer(Modifier.height(5.dp))
 
@@ -77,11 +73,11 @@ fun OptionsScreen(
 
         /* DONE BUTTON */
         Button(onClick = {
-            if (previousNumberOfRaces!=appViewModel.getNumberOfRaces()) {
+            if (previousNumberOfRaces != appViewModel.getNumberOfRaces()) {
                 onDoneButtonClickedAndDifferentNumberOfRaces()
-            } else onDoneButtonClicked()
-        }) { Text(text = "Done") }
-
+            } else
+                onDoneButtonClicked()
+        }) {Text(text = "Done") }
 
         /* DIALOG */
         if (showDialog.value) ChangedOptionsWarning(hideDialog)
@@ -125,9 +121,7 @@ fun DisplayCarsOptions(){
 
 @Composable
 fun DisplayTrackOptions(
-    onDisableCountriesClicked: () -> Unit = {},
-    onOptionChanged: () -> Unit,
-    appViewModel: AppViewModel
+    onDisableCountriesClicked: () -> Unit = {}
 ) {
     var equalNumberOfRaces by remember { mutableStateOf(equalNumberOfRacesFromEachCountry) }
     var limitOfTracksFromEachCountry by remember { mutableStateOf(limitOfTracksInEachCountry.toString()) }
@@ -144,7 +138,7 @@ fun DisplayTrackOptions(
             Switch(
                 checked = equalNumberOfRaces,
                 onCheckedChange = {
-                    onOptionChanged()
+                  //  onOptionChanged()
                     equalNumberOfRaces = it
                     equalNumberOfRacesFromEachCountry = it
                 }
@@ -161,7 +155,6 @@ fun DisplayTrackOptions(
                     // todo rename to avoid confusion
                     limitOfTracksFromEachCountry = value.filter { it.isDigit() }
                     limitOfTracksInEachCountry = limitOfTracksFromEachCountry.toInt()
-                    onOptionChanged()
                 }
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -187,7 +180,7 @@ fun DisplayRaceOptions(
 ) {
     var numberOfRaces by remember { mutableStateOf(appViewModel.getNumberOfRaces().toString()) }
 
-    Column() {
+    Column {
         Text(
             text = stringResource(id = R.string.Races),
             style = MaterialTheme.typography.headlineSmall
@@ -201,6 +194,7 @@ fun DisplayRaceOptions(
                         if (value.length in 0..2) {
                             numberOfRaces = value.filter { it.isDigit() }
                             appViewModel.setNumberOfRaces(numberOfRaces.toInt())
+                            appViewModel.setPreviousNumberOfRaces(numberOfRaces.toInt())
                         }
                     },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -225,7 +219,7 @@ fun ChangedOptionsWarning(
     AlertDialog(
         onDismissRequest = { onDismissDialog() },
         content = {
-            Column() {
+            Column {
                 Text(text = "Warning", style = MaterialTheme.typography.headlineMedium)
                 Spacer(modifier = Modifier.height(5.dp))
                 Text(
