@@ -5,10 +5,6 @@ import com.app.randomhcht.model.Car
 import com.app.randomhcht.model.Country
 import com.app.randomhcht.model.Track
 
-// 0 -> Disable Slow
-// 1 -> Disable Fast
-// 2 -> Disable Normal
-val carDrawOptions = mutableMapOf(0 to false, 1 to false, 2 to false)
 
 
 // Track drawing options

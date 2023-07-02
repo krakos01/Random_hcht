@@ -1,10 +1,8 @@
 package com.app.randomhcht.ui
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.app.randomhcht.data.Datasource
 import com.app.randomhcht.data.Datasource.cars
-import com.app.randomhcht.data.carDrawOptions
 import com.app.randomhcht.data.equalNumberOfRacesFromEachCountry
 import com.app.randomhcht.data.limitOfTracksInEachCountry
 import com.app.randomhcht.model.Car
@@ -14,9 +12,15 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlin.math.ceil
 
 private var NO_OF_RACES = 10
 private var previousNO_OF_RACES: Int = NO_OF_RACES
+
+// 0 -> Disable Slow
+// 1 -> Disable Fast
+// 2 -> Disable Normal
+val carDrawOptions = mutableMapOf(0 to false, 1 to false, 2 to false)
 
 class AppViewModel : ViewModel() {
 
@@ -59,20 +63,24 @@ class AppViewModel : ViewModel() {
         redraw: Boolean = false
     ) {
 
-        val carsBank =
-            if (carDrawOptions[0] == true) cars.filter { !it.slow }
-            else if (carDrawOptions[1] == true) cars.filter { !it.fast }
-            else if (carDrawOptions[2] == true) cars.filter { it.fast || it.slow }
-            else cars
+        var carsBank = cars
+        if (carDrawOptions[0] == true) carsBank = carsBank.filter { !it.slow }
+        if (carDrawOptions[1] == true) carsBank = carsBank.filter { !it.fast }
+        if (carDrawOptions[2] == true) carsBank = carsBank.filter { it.fast || it.slow }
+
 
         var car = carsBank.random()
         var car2 = carsBank.random()
 
-        if (!withRepetitions) {
+        if (!withRepetitions && carsBank.size>=NO_OF_RACES) {
             while (previousP1Cars.contains(car))
                 car = carsBank.random()
             while (previousP2Cars.contains(car2))
                 car2 = carsBank.random()
+        }
+        else {
+            car=carsBank.random()
+            car2=carsBank.random()
         }
 
         if (!redraw) {
@@ -90,7 +98,7 @@ class AppViewModel : ViewModel() {
 
     private fun drawTracks() {
         if (equalNumberOfRacesFromEachCountry) {
-            limitOfTracksInEachCountry = NO_OF_RACES.div(Country.values().size)
+            limitOfTracksInEachCountry = (ceil(NO_OF_RACES.toDouble() / Country.values().size.toDouble())).toInt()
         }
 
         if (limitOfTracksInEachCountry == 0) {
