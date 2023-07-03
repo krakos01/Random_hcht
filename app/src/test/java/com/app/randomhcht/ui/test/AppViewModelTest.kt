@@ -1,6 +1,5 @@
 package com.app.randomhcht.ui.test
 
-import com.app.randomhcht.data.NO_OF_RACES
 import com.app.randomhcht.ui.AppUiState
 import com.app.randomhcht.ui.AppViewModel
 import org.junit.Assert.*
@@ -60,7 +59,7 @@ class AppViewModelTest {
         var currentAppUiState: AppUiState
         var expectedNumberOfRaces = 1
 
-        repeat(NO_OF_RACES) {
+        repeat(viewModel.getNumberOfRaces()) {
             currentAppUiState = viewModel.uiState.value
 
             // Assert that after each "Next Race" button number of races is updated
@@ -71,7 +70,7 @@ class AppViewModelTest {
         }
         currentAppUiState = viewModel.uiState.value
 
-        assertEquals(currentAppUiState.currentRace, NO_OF_RACES)
+        assertEquals(currentAppUiState.currentRace, viewModel.getNumberOfRaces())
         assertTrue(currentAppUiState.isGameOver)
     }
 }

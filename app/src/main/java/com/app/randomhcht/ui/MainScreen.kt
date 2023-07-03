@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -42,7 +43,7 @@ fun MainScreenPreview() {
 fun MainScreen(
     modifier: Modifier = Modifier,
     appViewModel: AppViewModel = viewModel(),
-    onOptionsButtonClicked: () -> Unit
+    onOptionsButtonClicked: () -> Unit = {}
 ) {
     val appUiState by appViewModel.uiState.collectAsState()
 
@@ -111,12 +112,13 @@ fun DisplayTrackInformation(
                 modifier = modifier
                     .size(40.dp)
                     .padding(end = 8.dp)
-                    .clickable { onClick.invoke() },
+                    .clickable { onClick.invoke() }
+                    .testTag("flagButton"),
                 painter = painterResource(countryFlag),
                 contentDescription = track.Country.toString()
             )
             Text(
-                modifier = Modifier.align(CenterVertically),
+                modifier = Modifier.align(CenterVertically).testTag(track.trackName.toString()),
                 text = track.IdInCountry.toString() + " - " + stringResource(track.trackName),
                 style = MaterialTheme.typography.headlineSmall,
                 textAlign = TextAlign.Center,
