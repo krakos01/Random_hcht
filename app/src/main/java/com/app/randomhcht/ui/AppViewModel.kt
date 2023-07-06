@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.update
 import kotlin.math.ceil
 
 private var NO_OF_RACES = 10
+private val default_NO_OF_RACES = 10
 private var previousNO_OF_RACES: Int = NO_OF_RACES
 
 // 0 -> Disable Slow
@@ -38,7 +39,7 @@ class AppViewModel : ViewModel() {
         resetApp()
     }
 
-    fun setNumberOfRaces(newNoOfRaces: Int) {
+    fun setNumberOfRaces(newNoOfRaces: Int = default_NO_OF_RACES) {
         NO_OF_RACES = newNoOfRaces
     }
 
@@ -46,7 +47,7 @@ class AppViewModel : ViewModel() {
         return NO_OF_RACES
     }
 
-    fun setPreviousNumberOfRaces(newNoOfRaces: Int) {
+    fun setPreviousNumberOfRaces(newNoOfRaces: Int = default_NO_OF_RACES) {
         previousNO_OF_RACES = newNoOfRaces
     }
 

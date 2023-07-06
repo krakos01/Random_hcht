@@ -151,10 +151,14 @@ fun DisplayTrackOptions(
         trailingContent = { TextField(
             value = limitOfTracksFromEachCountry,
             onValueChange = { value ->
-                if (value.length <= 2) {
+                if (value.length in 1..2) {
                     // todo rename to avoid confusion
                     limitOfTracksFromEachCountry = value.filter { it.isDigit() }
                     limitOfTracksInEachCountry = limitOfTracksFromEachCountry.toInt()
+                }
+                else if (value.isEmpty()) {
+                    limitOfTracksFromEachCountry = ""
+                    limitOfTracksInEachCountry = 0
                 }
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -191,10 +195,15 @@ fun DisplayRaceOptions(
                 TextField(
                     value = numberOfRaces,
                     onValueChange = { value ->
-                        if (value.length in 0..2) {
+                        if (value.length in 1..2) {
                             numberOfRaces = value.filter { it.isDigit() }
                             appViewModel.setNumberOfRaces(numberOfRaces.toInt())
                             appViewModel.setPreviousNumberOfRaces(numberOfRaces.toInt())
+                        }
+                        else if (value.isEmpty()) {
+                            numberOfRaces = ""
+                            appViewModel.setNumberOfRaces()
+                            appViewModel.setPreviousNumberOfRaces()
                         }
                     },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -223,7 +232,7 @@ fun ChangedOptionsWarning(
                 Text(text = "Warning", style = MaterialTheme.typography.headlineMedium)
                 Spacer(modifier = Modifier.height(5.dp))
                 Text(
-                    text = "Changing tracks / races options will reset current progress",
+                    text = "Changing this will reset current progress",
                     style = MaterialTheme.typography.bodyMedium
                 )
                 Spacer(modifier = Modifier.height(10.dp))
