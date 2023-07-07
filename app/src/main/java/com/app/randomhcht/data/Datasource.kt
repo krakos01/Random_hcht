@@ -28,6 +28,13 @@ object Datasource {
     //  Pair(R.string.DisableSummerCar, "summer")
     )
 
+    fun swapCarsIds(car: Car, newId: Int) {
+        if (newId in 0..35) {
+            val oldId = car.ID
+            car.ID = newId
+            cars.find { it.ID == newId }!!.ID = oldId //todo
+        }
+    }
 
     val cars: List<Car> = mutableListOf(
         Car(1, R.string.Cruiser, R.drawable.cruiser),
@@ -66,14 +73,6 @@ object Datasource {
         Car(34, R.string.The_Fuzz, R.drawable.thefuzz),
         // TODO Add 35th car from summer addon
     )
-
-    fun swapCarsIds(car: Car, newId: Int) {
-        if (newId in 0..35) {
-            val oldId = car.ID
-            car.ID = newId
-            cars.find { it.ID == newId }!!.ID = oldId //todo
-        }
-    }
 
     val tracks: List<Track> = listOf(
         Track(1,1,R.string.Grass_Hills, Country.USA),

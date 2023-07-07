@@ -11,7 +11,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
@@ -88,7 +87,7 @@ fun DisplayTrackInformation(
         modifier = modifier
             .fillMaxWidth()
             .height(50.dp)
-            .padding(4.dp)
+            .padding(8.dp,16.dp,8.dp,4.dp)
     ) {
         Row(modifier
             .padding(horizontal = 8.dp)
@@ -173,14 +172,12 @@ fun DrawAgainAndNextRaceButtons(onDrawAgain: () -> Unit, onNextRace: () -> Unit,
     Column {
         Button(
             onClick = onDrawAgain,
-            colors = ButtonDefaults.buttonColors(Color(255,190,65)),
             modifier = modifier
         ) {
             Text(text = "Draw again")
         }
         Button(
             onClick = onNextRace,
-            colors = ButtonDefaults.buttonColors(Color(255,190,65)),
             modifier = modifier
         ) {
             Text(text = "Next race")
