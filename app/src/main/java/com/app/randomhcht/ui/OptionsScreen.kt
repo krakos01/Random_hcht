@@ -53,7 +53,7 @@ fun OptionsScreen(
     val hideDialog = { showDialog.value = false}
     val previousNumberOfRaces = appViewModel.getPreviousNumberOfRaces()
 
-    Column(modifier = Modifier.padding(5.dp)) {
+    Column(modifier = Modifier.padding(horizontal = 4.dp, vertical = 8.dp)) {
         /* CARS */
         DisplayCarsOptions()
         Divider()

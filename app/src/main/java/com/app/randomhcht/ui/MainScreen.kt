@@ -46,7 +46,9 @@ fun MainScreen(
 ) {
     val appUiState by appViewModel.uiState.collectAsState()
 
-    Column {
+    Column(
+        modifier.padding(horizontal = 4.dp, vertical = 8.dp)
+    ) {
         DisplayTrackInformation(
             track = appUiState.currentTrack,
             raceNo = appUiState.currentRace,
@@ -87,7 +89,6 @@ fun DisplayTrackInformation(
         modifier = modifier
             .fillMaxWidth()
             .height(50.dp)
-            .padding(8.dp,16.dp,8.dp,4.dp)
     ) {
         Row(modifier
             .padding(horizontal = 8.dp)
@@ -109,23 +110,26 @@ fun DisplayTrackInformation(
 
             Image(
                 modifier = modifier
+                    .fillMaxHeight()
                     .size(40.dp)
                     .padding(end = 8.dp)
-                    .clickable { onClick.invoke() }
+                    .clickable { onClick() }
                     .testTag("flagButton"),
                 painter = painterResource(countryFlag),
                 contentDescription = track.Country.toString()
             )
             Text(
-                modifier = Modifier.align(CenterVertically).testTag(track.trackName.toString()),
+                modifier = modifier
+                    .align(CenterVertically)
+                    .testTag(track.trackName.toString()),
                 text = track.IdInCountry.toString() + " - " + stringResource(track.trackName),
                 style = MaterialTheme.typography.headlineSmall,
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.SemiBold,
             )
-            Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier = modifier.weight(1f))
             Text(
-                modifier = Modifier.align(CenterVertically),
+                modifier = modifier.align(CenterVertically),
                 text = String.format("| %02d", raceNo) // example: 1 -> 01, 22 -> 22
             )
         }
@@ -134,7 +138,7 @@ fun DisplayTrackInformation(
 
 @Composable
 fun DisplayCars(modifier: Modifier = Modifier, p1Car: Car, p2Car: Car) {
-    Row(Modifier.padding(horizontal = 4.dp)) {
+    Row() {
         CarCard(car = p1Car,modifier = modifier)
         Spacer(modifier = Modifier.width(4.dp))
         CarCard(car = p2Car, modifier = modifier)
@@ -172,13 +176,15 @@ fun DrawAgainAndNextRaceButtons(onDrawAgain: () -> Unit, onNextRace: () -> Unit,
     Column {
         Button(
             onClick = onDrawAgain,
-            modifier = modifier
+            modifier = modifier,
+            shape = CardDefaults.shape
         ) {
             Text(text = "Draw again")
         }
         Button(
             onClick = onNextRace,
-            modifier = modifier
+            modifier = modifier,
+            shape = CardDefaults.shape
         ) {
             Text(text = "Next race")
         }
