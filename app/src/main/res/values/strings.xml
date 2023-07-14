@@ -159,7 +159,7 @@
 
     <string name="SameNumber">Equal number of tracks from each country</string>
     <string name="NoMore">No more than X tracks from each country</string>
-    <string name="DisableCountries">Disable selected countries</string>
+    <string name="SwapCarsIDs">Swap cars numbers</string>
 
     <string name="DisableSlow">Disable slow cars</string>
     <string name="DisableSlowMore">(Ladybug, Rookie, etc.)</string>

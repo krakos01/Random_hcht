@@ -16,7 +16,7 @@ object Datasource {
     val trackOptions = listOf (
         R.string.SameNumber,
         R.string.NoMore,
-        R.string.DisableCountries,
+        R.string.SwapCarsIDs,
     )
 
     val carOptions = listOf(

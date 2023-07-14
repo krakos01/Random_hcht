@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -42,7 +41,7 @@ fun ChangeCarIdScreen(
     carsList: List<Car>
 ) {
     Column(modifier = Modifier.padding(8.dp)) {
-        Text(text = "List of all cars with their IDs", style = MaterialTheme.typography.titleMedium)
+        Text(text = "List of all cars with their numbers", style = MaterialTheme.typography.titleMedium)
         LazyColumn(modifier = Modifier
             .weight(5f)
             .fillMaxWidth()) {
@@ -66,7 +65,6 @@ fun CarIdPicker(
         verticalArrangement = Arrangement.Center,
         modifier = modifier
     ) {
-
         val values = remember { (1..35).map { it.toString() } }
         val valuesPickerState1 = rememberPickerState()
         val valuesPickerState2 = rememberPickerState()
@@ -107,8 +105,9 @@ fun CarIdPicker(
                 Modifier
                     .fillMaxHeight()
                     .wrapContentHeight()
-                    .padding(start = 4.dp, top = 14.dp))
-            {
+                    .padding(start = 4.dp)
+            ) {
+                Spacer(modifier = Modifier.weight(0.5f))
                 Button(
                     onClick = {
                         appViewModel.swapCarsIds(
@@ -123,14 +122,16 @@ fun CarIdPicker(
                     }) {
                     Text(text = "SWAP")
                 }
-                Spacer(modifier = Modifier.height(8.dp))
-                Button(
-                    onClick = onCancelButtonClicked) {
-                    Text(text = "Done")
-                }
                 AnimatedVisibility(visible = swapped) {
                     Text(text = "SWAPPED", color = MaterialTheme.colorScheme.primary)
                 }
+                Spacer(modifier = Modifier.weight(0.5f))
+                Button(
+                    onClick = onCancelButtonClicked
+                ) {
+                    Text(text = "DONE")
+                }
+                Spacer(modifier = Modifier.weight(1f))
             }
         }
     }
