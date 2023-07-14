@@ -53,7 +53,7 @@ fun OptionsScreen(
     val hideDialog = { showDialog.value = false}
     val previousNumberOfRaces = appViewModel.getPreviousNumberOfRaces()
 
-    Column(modifier = Modifier.padding(horizontal = 4.dp, vertical = 8.dp)) {
+    Column(modifier = Modifier.padding(horizontal = 8.dp, vertical = 16.dp)) {
         /* CARS */
         DisplayCarsOptions()
         Divider()
@@ -152,7 +152,6 @@ fun DisplayTrackOptions(
             value = limitOfTracksFromEachCountry,
             onValueChange = { value ->
                 if (value.length in 1..2) {
-                    // todo rename to avoid confusion
                     limitOfTracksFromEachCountry = value.filter { it.isDigit() }
                     limitOfTracksInEachCountry = limitOfTracksFromEachCountry.toInt()
                 }
@@ -240,16 +239,6 @@ fun ChangedOptionsWarning(
                     Text(text = "OK")
                 }
             }
-            /*
-            Spacer(modifier = Modifier.height(10.dp))
-            Text(text =
-            "Previous options\n"+
-            "Equal number of tracks: $equalNumberOfRacesFromEachCountry" +
-            "No more than X tracks: $limitOfTracksInEachCountry" +
-            "Disabled countries: " + // todo Show disabled countries
-            "Number of races: $NO_OF_RACES"
-            ) },
-            */
-            }
+        }
     )
 }

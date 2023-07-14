@@ -3,8 +3,22 @@ package com.app.randomhcht.ui
 import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -22,11 +36,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.randomhcht.R
 import com.app.randomhcht.model.Car
 import com.app.randomhcht.model.Country
 import com.app.randomhcht.model.Track
 import com.app.randomhcht.ui.theme.RandomHchtTheme
+import com.example.randomhcht.R
 
 
 @Preview(showBackground = true, showSystemUi = true)
@@ -47,7 +61,7 @@ fun MainScreen(
     val appUiState by appViewModel.uiState.collectAsState()
 
     Column(
-        modifier.padding(horizontal = 4.dp, vertical = 8.dp)
+        modifier.padding(horizontal = 8.dp, vertical = 16.dp)
     ) {
         DisplayTrackInformation(
             track = appUiState.currentTrack,
@@ -149,7 +163,7 @@ fun DisplayCars(modifier: Modifier = Modifier, p1Car: Car, p2Car: Car) {
 @Composable
 fun CarCard(modifier: Modifier = Modifier, car: Car) {
     Card(
-        modifier = modifier
+        modifier = modifier,
     ) {
         Column {
             Image(
@@ -208,13 +222,18 @@ private fun FinishDialog(
             TextButton(
                 onClick = {
                     activity.finish()
-                }
+                },
+
             ) {
                 Text(text = "Exit")
             }
         },
         confirmButton = {
-            TextButton(onClick = onPlayAgain) { Text(text = "Play again") }
+            TextButton(
+                onClick = onPlayAgain,
+            ) {
+                Text(text = "Play again")
+            }
         }
     )
 }
