@@ -155,6 +155,14 @@ class AppViewModel : ViewModel() {
         _uiState.value = AppUiState(currentRace = 1, numberOfPreviousCars = 0)
         drawCars()
         drawTracks()
-        //Datasource().swapCarsIds(1,2)
     }
+
+
+    fun swapCarsIds(car1Id: Int, car2Id: Int) {
+        if (car2Id in 1..35) {
+            cars.find { it.ID == car2Id }!!.ID = car1Id
+            cars.find { it.ID == car1Id }!!.ID = car2Id
+        }
+    }
+
 }

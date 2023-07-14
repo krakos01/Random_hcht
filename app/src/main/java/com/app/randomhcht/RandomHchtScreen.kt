@@ -10,8 +10,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.app.randomhcht.data.Datasource
 import com.app.randomhcht.ui.AppViewModel
-import com.app.randomhcht.ui.DisableCountriesScreen
+import com.app.randomhcht.ui.ChangeCarIdScreen
 import com.app.randomhcht.ui.MainScreen
 import com.app.randomhcht.ui.OptionsScreen
 
@@ -57,9 +58,10 @@ fun RandomHchtApp(
             )
         }
         composable(route = RandomHchtScreen.Countries.name) {
-            DisableCountriesScreen(onDoneButtonClicked = {
-                navController.popBackStack()
-            })
+            ChangeCarIdScreen(
+                onCancelButtonClicked = { navController.popBackStack() },
+                carsList = Datasource.cars
+            )
         }
     }
 }

@@ -6,11 +6,9 @@ import com.app.randomhcht.model.Country
 import com.app.randomhcht.model.Track
 
 
-
 // Track drawing options
 var equalNumberOfRacesFromEachCountry = false
 var limitOfTracksInEachCountry = 0 // 0 = no limit
-var countriesToDisable: List<Country>? = null
 
 
 object Datasource {
@@ -28,13 +26,6 @@ object Datasource {
     //  Pair(R.string.DisableSummerCar, "summer")
     )
 
-    fun swapCarsIds(car: Car, newId: Int) {
-        if (newId in 0..35) {
-            val oldId = car.ID
-            car.ID = newId
-            cars.find { it.ID == newId }!!.ID = oldId //todo
-        }
-    }
 
     val cars: List<Car> = mutableListOf(
         Car(1, R.string.Cruiser, R.drawable.cruiser),
@@ -71,7 +62,7 @@ object Datasource {
         Car(32, R.string.Explorer, R.drawable.explorer),
         Car(33, R.string.Minuano, R.drawable.minuano),
         Car(34, R.string.The_Fuzz, R.drawable.thefuzz),
-        // TODO Add 35th car from summer addon
+        Car(35,R.string.Breeze, R.drawable.breeze)
     )
 
     val tracks: List<Track> = listOf(
