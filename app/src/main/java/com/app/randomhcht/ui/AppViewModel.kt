@@ -1,5 +1,6 @@
 package com.app.randomhcht.ui
 
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import com.app.randomhcht.data.Datasource
 import com.app.randomhcht.data.Datasource.cars
@@ -30,6 +31,10 @@ class AppViewModel : ViewModel() {
 
     private var previousP1Cars: MutableList<Car> = mutableListOf()
     private var previousP2Cars: MutableList<Car> = mutableListOf()
+
+    private val _myCars = cars
+    val myCars: SnapshotStateList<Car>
+        get() = _myCars
 
     // List of 10 random, shuffled tracks
     var tracks: List<Track> = mutableListOf()
@@ -63,8 +68,7 @@ class AppViewModel : ViewModel() {
         withRepetitions: Boolean = false,
         redraw: Boolean = false
     ) {
-
-        var carsBank = cars
+        var carsBank = myCars.toList()
         if (carDrawOptions[0] == true) carsBank = carsBank.filter { !it.slow }
         if (carDrawOptions[1] == true) carsBank = carsBank.filter { !it.fast }
         if (carDrawOptions[2] == true) carsBank = carsBank.filter { it.fast || it.slow }
@@ -159,9 +163,13 @@ class AppViewModel : ViewModel() {
 
 
     fun swapCarsIds(car1Id: Int, car2Id: Int) {
-        if (car2Id in 1..35) {
-            cars.find { it.ID == car2Id }!!.ID = car1Id
-            cars.find { it.ID == car1Id }!!.ID = car2Id
+        if (car1Id in 1..35 && car2Id in 1..35) {
+            val car1 = myCars.find { it.ID == car1Id }
+            val car2 = myCars.find { it.ID == car2Id }
+            myCars.removeAll(listOf(car1,car2).toSet())
+            car1!!.ID = car2Id
+            car2!!.ID = car1Id
+            myCars.addAll(listOf(car1,car2))
         }
     }
 

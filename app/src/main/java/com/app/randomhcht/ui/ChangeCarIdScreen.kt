@@ -22,6 +22,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -38,7 +39,7 @@ import kotlinx.coroutines.launch
 fun ChangeCarIdScreen(
     onCancelButtonClicked: () -> Unit = {},
     appViewModel: AppViewModel = viewModel(),
-    carsList: List<Car>
+    carsList: SnapshotStateList<Car>
 ) {
     Column(modifier = Modifier.padding(8.dp)) {
         Text(text = "List of all cars with their numbers", style = MaterialTheme.typography.titleMedium)
@@ -49,7 +50,7 @@ fun ChangeCarIdScreen(
                 Text(text = "${it.ID} - ${stringResource(id = it.name)}")
             }
         }
-        CarIdPicker(appViewModel, modifier = Modifier.weight(2f), onCancelButtonClicked = onCancelButtonClicked)
+        CarIdPicker(appViewModel, onCancelButtonClicked = onCancelButtonClicked, modifier = Modifier.weight(2f))
     }
 }
 

@@ -1,5 +1,6 @@
 package com.app.randomhcht.data
 
+import androidx.compose.runtime.mutableStateListOf
 import com.example.randomhcht.R
 import com.app.randomhcht.model.Car
 import com.app.randomhcht.model.Country
@@ -27,7 +28,7 @@ object Datasource {
     )
 
 
-    val cars: List<Car> = mutableListOf(
+    val cars = mutableStateListOf(
         Car(1, R.string.Cruiser, R.drawable.cruiser),
         Car(2, R.string.Infinity, R.drawable.infinity),
         Car(3, R.string.Bliss, R.drawable.bliss),
