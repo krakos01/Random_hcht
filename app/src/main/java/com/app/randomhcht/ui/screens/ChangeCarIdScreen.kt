@@ -1,19 +1,26 @@
-package com.app.randomhcht.ui
+package com.app.randomhcht.ui.screens
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,9 +38,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.app.randomhcht.model.Car
+import com.app.randomhcht.ui.AppViewModel
+import com.app.randomhcht.ui.Picker
+import com.app.randomhcht.ui.rememberPickerState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
 
 @Composable
 fun ChangeCarIdScreen(
@@ -42,21 +51,29 @@ fun ChangeCarIdScreen(
     carsList: SnapshotStateList<Car>
 ) {
     Column(modifier = Modifier.padding(8.dp)) {
-        Text(text = "List of all cars with their numbers", style = MaterialTheme.typography.titleMedium)
-        LazyColumn(modifier = Modifier
-            .weight(5f)
-            .fillMaxWidth()) {
-            items(carsList.sortedBy { it.ID }) {
-                Text(text = "${it.ID} - ${stringResource(id = it.name)}")
-            }
-        }
-        CarIdPicker(appViewModel, onCancelButtonClicked = onCancelButtonClicked, modifier = Modifier.weight(2f))
+        Text(
+            text = "List of all cars",
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentWidth()
+        )
+        CarIdCardList(
+            modifier = Modifier.weight(2f),
+            myCars = carsList
+        )
+        Spacer(modifier = Modifier.height(24.dp))
+        CarIdPicker(
+            appViewModel = appViewModel,
+            onCancelButtonClicked = onCancelButtonClicked,
+            modifier = Modifier.weight(1f)
+        )
     }
 }
 
 
 @Composable
-fun CarIdPicker(
+fun CarIdPickerOld(
     appViewModel: AppViewModel,
     onCancelButtonClicked: () -> Unit,
     modifier: Modifier,
@@ -136,4 +153,87 @@ fun CarIdPicker(
             }
         }
     }
+}
+
+
+@Composable
+fun CarIdCard(
+    modifier: Modifier,
+    carName: String,
+    carId: Int
+) {
+    var isClicked by remember { mutableStateOf(false) }
+    val borderModifier = if (isClicked) {
+        Modifier.border(2.dp, MaterialTheme.colorScheme.tertiary)
+    }
+    else {Modifier}
+    Card(
+        shape = RoundedCornerShape(4.dp),
+        modifier = borderModifier.clickable {
+            isClicked = !isClicked
+            Log.d("Border Modifier", isClicked.toString())
+        }) {
+        Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.padding(4.dp)) {
+            Text(
+                text = carId.toString(),
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Text(
+                text = carName,
+                style = MaterialTheme.typography.bodyLarge
+            )
+        }
+    }
+}
+
+
+@Composable
+fun CarIdCardList(
+    modifier: Modifier,
+    myCars: SnapshotStateList<Car>
+) {
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = modifier
+    ) {
+        items(myCars.sortedBy { it.ID }) {
+            CarIdCard(
+                modifier = modifier,
+                carName = stringResource(id = it.name),
+                carId = it.ID
+            )
+        }
+    }
+}
+
+
+@Composable
+fun CarIdPicker(
+    modifier: Modifier,
+    appViewModel: AppViewModel,
+    onCancelButtonClicked: () -> Unit
+) {
+    val valuesPickerState1 = remember { mutableStateOf(appViewModel.myCars[6]) }
+    val valuesPickerState2 = remember { mutableStateOf(appViewModel.myCars[0]) }
+    var swapped: Boolean by remember { mutableStateOf(false) }
+    val coroutineScope = rememberCoroutineScope()
+
+    Column(modifier = modifier) {
+        Text(
+            text = "After swapping",
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentWidth()
+        )
+        Text(
+            text = "Select two cars",
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentWidth()
+        )
+    }
+
 }
