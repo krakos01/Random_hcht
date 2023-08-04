@@ -11,9 +11,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.app.randomhcht.ui.AppViewModel
-import com.app.randomhcht.ui.ChangeCarIdScreen
-import com.app.randomhcht.ui.MainScreen
-import com.app.randomhcht.ui.OptionsScreen
+import com.app.randomhcht.ui.screens.ChangeCarIdScreen
+import com.app.randomhcht.ui.screens.MainScreen
+import com.app.randomhcht.ui.screens.OptionsScreen
 
 enum class RandomHchtScreen(@StringRes val title: Int) {
     Start(0),
@@ -58,10 +58,9 @@ fun RandomHchtApp(
         }
         composable(route = RandomHchtScreen.CarsIdChange.name) {
             ChangeCarIdScreen(
-                onCancelButtonClicked = { navController.popBackStack() },
+                onDoneButtonClicked = { navController.popBackStack() },
                 carsList = viewModel.myCars
             )
         }
     }
 }
-

@@ -1,4 +1,4 @@
-package com.app.randomhcht.ui
+package com.app.randomhcht.ui.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -10,7 +10,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
@@ -33,6 +32,8 @@ import com.app.randomhcht.data.Datasource.carOptions
 import com.app.randomhcht.data.Datasource.trackOptions
 import com.app.randomhcht.data.equalNumberOfRacesFromEachCountry
 import com.app.randomhcht.data.limitOfTracksInEachCountry
+import com.app.randomhcht.ui.AppViewModel
+import com.app.randomhcht.ui.carDrawOptions
 import com.example.randomhcht.R
 
 
@@ -218,26 +219,21 @@ fun DisplayRaceOptions(
     }
 }
 
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChangedOptionsWarning(
-    onDismissDialog: () -> Unit
+    onDismissDialog: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     AlertDialog(
         onDismissRequest = { onDismissDialog() },
-        content = {
-            Column {
-                Text(text = "Warning", style = MaterialTheme.typography.headlineMedium)
-                Spacer(modifier = Modifier.height(5.dp))
-                Text(
-                    text = "Changing this will reset current progress",
-                    style = MaterialTheme.typography.bodyMedium
-                )
-                Spacer(modifier = Modifier.height(10.dp))
-                TextButton(onClick = onDismissDialog) {
-                    Text(text = "OK")
-                }
+        title = { Text(text = "Be careful!") },
+        text = { Text(text = "Changing this will reset current progress") },
+        modifier = modifier,
+        confirmButton = {
+            TextButton(
+                onClick = onDismissDialog,
+            ) {
+                Text(text = "OK")
             }
         }
     )
