@@ -15,16 +15,16 @@ var limitOfTracksInEachCountry = 0 // 0 = no limit
 object Datasource {
 
     val trackOptions = listOf (
-        R.string.SameNumber,
-        R.string.NoMore,
-        R.string.SwapCarsIDs,
+        R.string.same_number,
+        R.string.no_more_from_country,
     )
 
     val carOptions = listOf(
-        Pair(R.string.DisableSlow, "slow"),
-        Pair(R.string.DisableFast, "fast"),
-        Pair(R.string.DisableNormal, "normal"),
-    //  Pair(R.string.DisableSummerCar, "summer")
+        Pair(R.string.disable_slow, "slow"),
+        Pair(R.string.disable_fast, "fast"),
+        Pair(R.string.disable_normal, "normal"),
+        Pair(R.string.disable_summer_car, "summer"),
+        Pair(R.string.swap_cars_ids, "swap")
     )
 
 

@@ -22,7 +22,7 @@ private var PREVIOUS_NO_OF_RACES: Int = NO_OF_RACES
 // 0 -> Disable Slow
 // 1 -> Disable Fast
 // 2 -> Disable Normal
-val carDrawOptions = mutableMapOf(0 to false, 1 to false, 2 to false)
+val carDrawOptions = mutableMapOf(0 to false, 1 to false, 2 to false, 3 to false)
 
 class AppViewModel : ViewModel() {
 
@@ -61,9 +61,12 @@ class AppViewModel : ViewModel() {
     }
 
 
-    // Function draws cars for both players.
-    // If redraw==true then draws new car until gets one that wasn't used is drawn and returns it.
-    // Also handles adding new car to the list of previous cars.
+    /**
+    Draws cars for both players.
+    If redraw==true then draws new car until gets one that wasn't used is drawn and returns it.
+
+    Also handles adding new car to the list of previous cars.
+    **/
     fun drawCars(
         withRepetitions: Boolean = false,
         redraw: Boolean = false
@@ -114,10 +117,10 @@ class AppViewModel : ViewModel() {
             val listOfTracks: MutableList<Track> = mutableListOf()
             for (i in 1..NO_OF_RACES) {
                 var elem = Datasource.tracks.random()
-                while (listOfPreviousCountries.count { it == elem.Country } >= limitOfTracksInEachCountry) {
+                while (listOfPreviousCountries.count { it == elem.country } >= limitOfTracksInEachCountry) {
                     elem = Datasource.tracks.random()
                 }
-                listOfPreviousCountries.add(elem.Country)
+                listOfPreviousCountries.add(elem.country)
                 listOfTracks.add(elem)
             }
 
@@ -164,11 +167,11 @@ class AppViewModel : ViewModel() {
 
     fun swapCarsIds(car1Id: Int, car2Id: Int) {
         if (car1Id in 1..35 && car2Id in 1..35) {
-            val car1 = myCars.find { it.ID == car1Id }
-            val car2 = myCars.find { it.ID == car2Id }
+            val car1 = myCars.find { it.id == car1Id }
+            val car2 = myCars.find { it.id == car2Id }
             myCars.removeAll(listOf(car1,car2).toSet())
-            car1!!.ID = car2Id
-            car2!!.ID = car1Id
+            car1!!.id = car2Id
+            car2!!.id = car1Id
             myCars.addAll(listOf(car1,car2))
         }
     }

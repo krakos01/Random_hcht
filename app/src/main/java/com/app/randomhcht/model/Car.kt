@@ -4,7 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
 data class Car(
-    var ID: Int,
+    var id: Int,
     @StringRes val name: Int,
     @DrawableRes val icon: Int,
     val slow: Boolean = false,

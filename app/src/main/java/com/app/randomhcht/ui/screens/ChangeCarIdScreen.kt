@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -13,10 +14,13 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -28,12 +32,15 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.app.randomhcht.model.Car
 import com.app.randomhcht.ui.AppViewModel
+import com.example.randomhcht.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -44,19 +51,28 @@ fun ChangeCarIdScreen(
     carsList: SnapshotStateList<Car>
 ) {
     val selectedCars: MutableList<Car> = remember { mutableStateListOf() }
-        
-    Column(modifier = Modifier.padding(8.dp)) {
-        CarsCardsAfterChange(
-            selectedCars = selectedCars,
-            modifier = Modifier.weight(2f)
-        )
-        CarIdCardList(
-            modifier = Modifier.weight(7f),
-            myCars = carsList,
-            selectedCars = selectedCars,
-            appViewModel = appViewModel,
-            onDoneButtonClicked = onDoneButtonClicked
-        )
+
+    Scaffold(
+        bottomBar = {
+            BottomBarWithButtons(
+                selectedCars = selectedCars,
+                appViewModel = appViewModel,
+                onDoneButtonClicked = onDoneButtonClicked
+            ) }
+    ) {
+        Column(
+            modifier = Modifier.padding(it)
+        ) {
+            CarsCardsAfterChange(
+                selectedCars = selectedCars,
+                modifier = Modifier,
+            )
+            CarIdCardList(
+                modifier = Modifier,
+                myCars = carsList,
+                selectedCars = selectedCars
+            )
+        }
     }
 }
 
@@ -64,15 +80,14 @@ fun ChangeCarIdScreen(
 fun CarIdCard(
     modifier: Modifier = Modifier,
     car: Car,
-    selectedCars: MutableList<Car>,
-    onClick: (Car) -> Unit = {}
+    onClick: (Car) -> Unit
 ) {
 
     var isClicked by remember { mutableStateOf(false) }
     val borderModifier = if (isClicked) {
         Modifier.border(2.dp, MaterialTheme.colorScheme.tertiary)
     }
-    else {Modifier}
+    else { modifier }
     Card(
         shape = RoundedCornerShape(4.dp),
         modifier = borderModifier
@@ -83,7 +98,7 @@ fun CarIdCard(
             }) {
         Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.padding(2.dp)) {
             Text(
-                text = car.ID.toString(),
+                text = car.id.toString(),
                 style = MaterialTheme.typography.bodyLarge
             )
             Text(
@@ -99,18 +114,10 @@ fun CarIdCard(
 fun CarIdCardList(
     modifier: Modifier = Modifier,
     myCars: SnapshotStateList<Car>,
-    selectedCars: MutableList<Car>,
-    appViewModel: AppViewModel,
-    onDoneButtonClicked: () -> Unit
+    selectedCars: MutableList<Car>
 ) {
-    var swapped: Boolean by remember { mutableStateOf(false) }
-    var buttonText: String by remember { mutableStateOf("SWAP") }
-    val openDialog = remember { mutableStateOf(false)  }
-    val hideDialog = { openDialog.value = false}
-    val coroutineScope = rememberCoroutineScope()
-
     Text(
-        text = "List of all cars",
+        text = stringResource(id = R.string.list_of_all_cars),
         style = MaterialTheme.typography.titleMedium,
         modifier = Modifier
             .fillMaxWidth()
@@ -121,66 +128,83 @@ fun CarIdCardList(
         columns = GridCells.Fixed(2),
         modifier = modifier
     ) {
-        items(myCars.sortedBy { it.ID }) {
+        items(myCars.sortedBy { it.id }) {
             CarIdCard(
                 modifier = modifier,
                 car = it,
-                selectedCars = selectedCars,
                 onClick = { car ->
                     if (selectedCars.contains(car)) {
                         selectedCars.remove(car)
                     }
-                    else {// if (selectedCars.size<2) {
+                    else  {
                         selectedCars.add(car)
                     }
                 }
             )
         }
     }
+}
 
-    Column(
-        modifier = Modifier.padding(4.dp)
+@Composable
+fun BottomBarWithButtons(
+    modifier: Modifier = Modifier,
+    selectedCars: MutableList<Car>,
+    appViewModel: AppViewModel,
+    onDoneButtonClicked: () -> Unit
+) {
+    val context = LocalContext.current
+    
+    var swapped: Boolean by remember { mutableStateOf(false) }
+    var buttonText: String by remember { mutableStateOf(context.resources.getString(R.string.swap_button)) }
+    val openDialog = remember { mutableStateOf(false)  }
+    val hideDialog = { openDialog.value = false}
+    val coroutineScope = rememberCoroutineScope()
+
+    BottomAppBar(
+        modifier = modifier.height(ButtonDefaults.MinHeight*3),
+        containerColor = Color.Transparent
     ) {
-        Button(
-            modifier = Modifier.fillMaxWidth(),
-            shape = CardDefaults.shape,
-            onClick = {
-                if (selectedCars.size == 2) {
-                    appViewModel.swapCarsIds(
-                        selectedCars[0].ID,
-                        selectedCars[1].ID
-                    )
-                    coroutineScope.launch {
-                        swapped = true
-                        buttonText = "SWAPPED"
-                        delay(2500)
-                        buttonText = "SWAP"
+        Column {
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                shape = CardDefaults.shape,
+                onClick = {
+                    if (selectedCars.size == 2) {
+                        appViewModel.swapCarsIds(
+                            selectedCars[0].id,
+                            selectedCars[1].id
+                        )
+                        coroutineScope.launch {
+                            swapped = true
+                            buttonText = context.resources.getString(R.string.swap_button_after_click)
+                            delay(2500)
+                            buttonText = context.resources.getString(R.string.swap_button)
+                        }
                     }
-                }
-                else openDialog.value=true
-            }) {
-            Text(text = buttonText)
-        }
-        Button(
-            modifier = Modifier.fillMaxWidth(),
-            shape = CardDefaults.shape,
-            onClick = onDoneButtonClicked
-        ) {
-            Text(text = "DONE")
+                    else openDialog.value=true
+                }) {
+                Text(text = buttonText)
+            }
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                shape = CardDefaults.shape,
+                onClick = onDoneButtonClicked
+            ) {
+                Text(text = stringResource(id = R.string.done_button))
+            }
         }
     }
     if (openDialog.value) SwapErrorAlertDialog(hideDialog)
 }
-
 
 @Composable
 fun CarsCardsAfterChange(
     modifier: Modifier,
     selectedCars: MutableList<Car>,
 ) {
-    Column(modifier = modifier) {
+    Column(modifier = modifier.padding(bottom = 10.dp)) {
         Text(
-            text = "After swapping",
+            text = stringResource(id = R.string.after_swap),
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier
                 .fillMaxWidth()
@@ -188,7 +212,7 @@ fun CarsCardsAfterChange(
         )
         if (selectedCars.size!=2) {
             Text(
-                text = "Select two cars",
+                text = stringResource(id = R.string.select_two_cars),
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentWidth()
@@ -196,8 +220,8 @@ fun CarsCardsAfterChange(
         }
         else {
             Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                CarCard(modifier.weight(1f), car = selectedCars[0].copy(ID = selectedCars[1].ID))
-                CarCard(modifier.weight(1f), car = selectedCars[1].copy(ID = selectedCars[0].ID))
+                CarCard(modifier.weight(1f), car = selectedCars[0].copy(id = selectedCars[1].id))
+                CarCard(modifier.weight(1f), car = selectedCars[1].copy(id = selectedCars[0].id))
             }
         }
     }
@@ -208,14 +232,14 @@ fun CarsCardsAfterChange(
 fun SwapErrorAlertDialog(onDismissRequest: () -> Unit, modifier: Modifier = Modifier) {
     AlertDialog(
         onDismissRequest = { onDismissRequest() },
-        title = { Text(text = "Select 2 cars") },
-        text = { Text(text = "No more, no less")},
+        title = { Text(text = stringResource(id = R.string.select_two_cars)) },
+        text = { Text(text = stringResource(id = R.string.no_more_no_less))},
         modifier = modifier,
         confirmButton = {
             TextButton(
                 onClick = onDismissRequest,
             ) {
-                Text(text = "OK")
+                Text(text = stringResource(id = R.string.ok_button))
             }
         }
     )
