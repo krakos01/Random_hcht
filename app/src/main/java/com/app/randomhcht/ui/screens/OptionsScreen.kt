@@ -56,12 +56,12 @@ fun OptionsScreen(
 
     Column(modifier = Modifier.padding(horizontal = 8.dp, vertical = 16.dp)) {
         /* CARS */
-        DisplayCarsOptions()
+        DisplayCarsOptions(onDisableCountriesClicked)
         Divider()
         Spacer(Modifier.height(5.dp))
 
         /* TRACKS */
-        DisplayTrackOptions(onDisableCountriesClicked)
+        DisplayTrackOptions()
         Divider()
         Spacer(Modifier.height(5.dp))
 
@@ -100,6 +100,7 @@ fun CarListItem(carOption: Pair<Int,String>, cdOption: Boolean) {
                     "slow" -> carDrawOptions[0] = it
                     "fast" -> carDrawOptions[1] = it
                     "normal" -> carDrawOptions[2] = it
+                    "summer" -> carDrawOptions[3] = it
                 }
             }
         ) },
@@ -108,7 +109,9 @@ fun CarListItem(carOption: Pair<Int,String>, cdOption: Boolean) {
 
 
 @Composable
-fun DisplayCarsOptions(){
+fun DisplayCarsOptions(
+    onDisableCountriesClicked: () -> Unit
+){
     Text(
         text = stringResource(id = R.string.Cars),
         style = MaterialTheme.typography.headlineSmall
@@ -117,13 +120,19 @@ fun DisplayCarsOptions(){
     for (i in 0 until carOptions.count()) {
         carDrawOptions[i]?.let { CarListItem(carOption = carOptions[i], cdOption = it) }
     }
+
+    ListItem(
+        headlineContent = {
+            Text(
+                text = stringResource(id = carOptions[4].first),
+                Modifier.clickable { onDisableCountriesClicked() }
+            ) },
+    )
 }
 
 
 @Composable
-fun DisplayTrackOptions(
-    onDisableCountriesClicked: () -> Unit = {}
-) {
+fun DisplayTrackOptions() {
     var equalNumberOfRaces by remember { mutableStateOf(equalNumberOfRacesFromEachCountry) }
     var limitOfTracksFromEachCountry by remember { mutableStateOf(limitOfTracksInEachCountry.toString()) }
     // var disabledCountries = remember { mutableListOf<Country>() }
@@ -165,14 +174,6 @@ fun DisplayTrackOptions(
             singleLine = true,
             modifier = Modifier.width(50.dp)
         ) },
-    )
-
-    ListItem(
-        headlineContent = {
-            Text(
-                text = stringResource(id = trackOptions[2]),
-                Modifier.clickable { onDisableCountriesClicked() }
-            ) },
     )
 }
 

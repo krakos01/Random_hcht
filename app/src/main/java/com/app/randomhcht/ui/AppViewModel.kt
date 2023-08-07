@@ -22,6 +22,7 @@ private var PREVIOUS_NO_OF_RACES: Int = NO_OF_RACES
 // 0 -> Disable Slow
 // 1 -> Disable Fast
 // 2 -> Disable Normal
+// 3 -> Disable Summer
 val carDrawOptions = mutableMapOf(0 to false, 1 to false, 2 to false, 3 to false)
 
 class AppViewModel : ViewModel() {
