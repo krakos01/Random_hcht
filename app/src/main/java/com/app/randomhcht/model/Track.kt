@@ -3,8 +3,8 @@ package com.app.randomhcht.model
 import androidx.annotation.StringRes
 
 data class Track(
-    val ID: Int,
-    val IdInCountry: Int,
+    val id: Int,
+    val idInCountry: Int,
     @StringRes val trackName: Int,
-    val Country: Country,
+    val country: Country,
 )

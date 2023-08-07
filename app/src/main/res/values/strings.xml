@@ -157,17 +157,26 @@
     <string name = "Cars">Cars</string>
     <string name = "Races">Races</string>
 
-    <string name="SameNumber">Equal number of tracks from each country</string>
-    <string name="NoMore">No more than X tracks from each country</string>
-    <string name="DisableCountries">Disable selected countries</string>
+    <string name="same_number">Equal number of tracks from each country</string>
+    <string name="no_more_from_country">No more than X tracks from each country</string>
+    <string name="swap_cars_ids">Swap cars numbers</string>
 
-    <string name="DisableSlow">Disable slow cars</string>
-    <string name="DisableSlowMore">(Ladybug, Rookie, etc.)</string>
-    <string name="DisableFast">Disable fast cars</string>
-    <string name="DisableFastMore">(Zeus, Haze, etc.)</string>
-    <string name="DisableNormal">Disable normal cars</string>
-    <string name="DisableNormalMore">(Not slow and not fast, like Cruiser)</string>
-    <string name="DisableSummerCar">Disable summer car</string>
+    <string name="disable_slow">Disable slow cars</string>
+    <string name="disable_slow_more">(Ladybug, Rookie, etc.)</string>
+    <string name="disable_fast">Disable fast cars</string>
+    <string name="disable_fast_more">(Zeus, Haze, etc.)</string>
+    <string name="disable_normal">Disable normal cars</string>
+    <string name="disable_normal_more">(Not slow and not fast, like Cruiser)</string>
+    <string name="disable_summer_car">Disable summer car</string>
 
     <string name="NumberOfRaces">Number of races: </string>
+    <string name="list_of_all_cars">List of all cars</string>
+    <string name="swap_button">SWAP</string>
+    <string name="swap_button_after_click">SWAPPED</string>
+    <string name="done_button">DONE</string>
+    <string name="ok_button">OK</string>
+    <string name="select_two_cars">Select 2 cars</string>
+    <string name="no_more_no_less">No more, no less</string>
+    <string name="after_swap">After swap</string>
+
 </resources>

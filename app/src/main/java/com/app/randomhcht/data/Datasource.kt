@@ -1,5 +1,6 @@
 package com.app.randomhcht.data
 
+import androidx.compose.runtime.mutableStateListOf
 import com.example.randomhcht.R
 import com.app.randomhcht.model.Car
 import com.app.randomhcht.model.Country
@@ -14,20 +15,20 @@ var limitOfTracksInEachCountry = 0 // 0 = no limit
 object Datasource {
 
     val trackOptions = listOf (
-        R.string.SameNumber,
-        R.string.NoMore,
-        R.string.DisableCountries,
+        R.string.same_number,
+        R.string.no_more_from_country,
     )
 
     val carOptions = listOf(
-        Pair(R.string.DisableSlow, "slow"),
-        Pair(R.string.DisableFast, "fast"),
-        Pair(R.string.DisableNormal, "normal"),
-    //  Pair(R.string.DisableSummerCar, "summer")
+        Pair(R.string.disable_slow, "slow"),
+        Pair(R.string.disable_fast, "fast"),
+        Pair(R.string.disable_normal, "normal"),
+        Pair(R.string.disable_summer_car, "summer"),
+        Pair(R.string.swap_cars_ids, "swap")
     )
 
 
-    val cars: List<Car> = mutableListOf(
+    val cars = mutableStateListOf(
         Car(1, R.string.Cruiser, R.drawable.cruiser),
         Car(2, R.string.Infinity, R.drawable.infinity),
         Car(3, R.string.Bliss, R.drawable.bliss),

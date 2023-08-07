@@ -1,4 +1,4 @@
-package com.app.randomhcht.ui
+package com.app.randomhcht.ui.screens
 
 import android.app.Activity
 import androidx.compose.foundation.Image
@@ -39,6 +39,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.app.randomhcht.model.Car
 import com.app.randomhcht.model.Country
 import com.app.randomhcht.model.Track
+import com.app.randomhcht.ui.AppViewModel
 import com.app.randomhcht.ui.theme.RandomHchtTheme
 import com.example.randomhcht.R
 
@@ -107,7 +108,7 @@ fun DisplayTrackInformation(
         Row(modifier
             .padding(horizontal = 8.dp)
         ) {
-            val countryFlag = when(track.Country) {
+            val countryFlag = when(track.country) {
                 Country.USA -> R.drawable.usa
                 Country.CHILE -> R.drawable.chile
                 Country.BRAZIL -> R.drawable.brazil
@@ -130,13 +131,13 @@ fun DisplayTrackInformation(
                     .clickable { onClick() }
                     .testTag("flagButton"),
                 painter = painterResource(countryFlag),
-                contentDescription = track.Country.toString()
+                contentDescription = track.country.toString()
             )
             Text(
                 modifier = modifier
                     .align(CenterVertically)
                     .testTag(track.trackName.toString()),
-                text = track.IdInCountry.toString() + " - " + stringResource(track.trackName),
+                text = track.idInCountry.toString() + " - " + stringResource(track.trackName),
                 style = MaterialTheme.typography.headlineSmall,
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.SemiBold,
@@ -174,7 +175,7 @@ fun CarCard(modifier: Modifier = Modifier, car: Car) {
                 contentScale = ContentScale.Crop,
                 contentDescription = "Car icon")
             Text(
-                text = car.ID.toString() + " - " +stringResource(car.name),
+                text = car.id.toString() + " - " +stringResource(car.name),
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.headlineSmall.copy(fontSize = 18.sp),
                 fontWeight = FontWeight.SemiBold,

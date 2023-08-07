@@ -6,7 +6,7 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import com.app.randomhcht.ui.AppViewModel
-import com.app.randomhcht.ui.MainScreen
+import com.app.randomhcht.ui.screens.MainScreen
 import org.junit.Rule
 import org.junit.Test
 
