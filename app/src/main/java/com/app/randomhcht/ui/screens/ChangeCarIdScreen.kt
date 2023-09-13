@@ -202,7 +202,11 @@ fun CarsCardsAfterChange(
     modifier: Modifier,
     selectedCars: MutableList<Car>,
 ) {
-    Column(modifier = modifier.padding(bottom = 10.dp)) {
+    Column(
+        modifier = modifier
+            .padding(bottom = 10.dp)
+            .height(160.dp)
+    ) {
         Text(
             text = stringResource(id = R.string.after_swap),
             style = MaterialTheme.typography.titleMedium,
