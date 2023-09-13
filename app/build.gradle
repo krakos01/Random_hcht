@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.randomhcht'
+    namespace 'com.randomhcht'
     compileSdk 34
 
     defaultConfig {

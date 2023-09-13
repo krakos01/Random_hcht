@@ -34,7 +34,7 @@ import com.app.randomhcht.data.equalNumberOfRacesFromEachCountry
 import com.app.randomhcht.data.limitOfTracksInEachCountry
 import com.app.randomhcht.ui.AppViewModel
 import com.app.randomhcht.ui.carDrawOptions
-import com.example.randomhcht.R
+import com.randomhcht.R
 
 
 @Preview(showSystemUi = true)

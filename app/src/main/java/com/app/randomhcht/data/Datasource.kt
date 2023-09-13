@@ -1,7 +1,7 @@
 package com.app.randomhcht.data
 
 import androidx.compose.runtime.mutableStateListOf
-import com.example.randomhcht.R
+import com.randomhcht.R
 import com.app.randomhcht.model.Car
 import com.app.randomhcht.model.Country
 import com.app.randomhcht.model.Track

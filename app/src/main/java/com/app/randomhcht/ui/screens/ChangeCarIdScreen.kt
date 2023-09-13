@@ -40,7 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.app.randomhcht.model.Car
 import com.app.randomhcht.ui.AppViewModel
-import com.example.randomhcht.R
+import com.randomhcht.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

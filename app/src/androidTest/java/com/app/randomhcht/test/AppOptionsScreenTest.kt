@@ -5,7 +5,7 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import com.app.randomhcht.data.Datasource
 import com.app.randomhcht.ui.screens.OptionsScreen
-import com.example.randomhcht.R
+import com.randomhcht.R
 import org.junit.Rule
 import org.junit.Test
 

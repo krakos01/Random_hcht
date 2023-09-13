@@ -41,7 +41,7 @@ import com.app.randomhcht.model.Country
 import com.app.randomhcht.model.Track
 import com.app.randomhcht.ui.AppViewModel
 import com.app.randomhcht.ui.theme.RandomHchtTheme
-import com.example.randomhcht.R
+import com.randomhcht.R
 
 
 @Preview(showBackground = true, showSystemUi = true)
