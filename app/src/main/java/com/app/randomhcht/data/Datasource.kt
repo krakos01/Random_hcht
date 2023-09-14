@@ -20,11 +20,11 @@ object Datasource {
     )
 
     val carOptions = listOf(
-        Pair(R.string.disable_slow, "slow"),
-        Pair(R.string.disable_fast, "fast"),
-        Pair(R.string.disable_normal, "normal"),
-        Pair(R.string.disable_summer_car, "summer"),
-        Pair(R.string.swap_cars_ids, "swap")
+        Triple(R.string.disable_slow, R.string.disable_slow_more, "slow"),
+        Triple(R.string.disable_fast, R.string.disable_fast_more, "fast"),
+        Triple(R.string.disable_normal, R.string.disable_normal_more, "normal"),
+        Triple(R.string.disable_summer_car, null, "summer"),
+        Triple(R.string.swap_cars_ids, null, "swap")
     )
 
 

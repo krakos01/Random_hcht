@@ -156,17 +156,19 @@
     <string name = "Tracks">Tracks</string>
     <string name = "Cars">Cars</string>
     <string name = "Races">Races</string>
-
+    <string name="Cars_Warning">
+        In case that there are more races than possible cars, those options will not be used
+    </string>
     <string name="same_number">Equal number of tracks from each country</string>
     <string name="no_more_from_country">No more than X tracks from each country</string>
     <string name="swap_cars_ids">Swap cars numbers</string>
 
-    <string name="disable_slow">Disable slow cars</string>
-    <string name="disable_slow_more">(Ladybug, Rookie, etc.)</string>
-    <string name="disable_fast">Disable fast cars</string>
-    <string name="disable_fast_more">(Zeus, Haze, etc.)</string>
-    <string name="disable_normal">Disable normal cars</string>
-    <string name="disable_normal_more">(Not slow and not fast, like Cruiser)</string>
+    <string name="disable_slow">Disable slow cars (3)</string>
+    <string name="disable_slow_more">Ladybug, Nano, Rookie</string>
+    <string name="disable_fast">Disable fast cars (6)</string>
+    <string name="disable_fast_more">Zeus, Twilight, etc.</string>
+    <string name="disable_normal">Disable normal cars (26)</string>
+    <string name="disable_normal_more">Not slow and not fast</string>
     <string name="disable_summer_car">Disable summer car</string>
 
     <string name="NumberOfRaces">Number of races: </string>
