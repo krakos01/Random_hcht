@@ -1,12 +1,12 @@
 # Random_hcht
 
-Simple app which generates selected number of races (cars + track). Has many options that allow you to adjust it to your needs.
+Simple app which generates selected number of races (cars + track) with options that allow to adjust it to your needs.
 
-### Home Screen
-![HomeScreen_Random hcht720](https://github.com/krakos01/Random_hcht/assets/62389231/52e5d251-c248-4c1a-b9f8-24fb862ab605)
+### Screenshots
+<sup>PS. Click flag to open options</sup>
 
-### Options Screen
-![OptionsScreen_Random hcht](https://github.com/krakos01/Random_hcht/assets/62389231/9a26c41d-15eb-4aa7-91ac-e65cf0fdbba2)
+<img src="https://github.com/krakos01/Random_hcht/assets/62389231/913729da-4ee7-4df7-bd96-cd694a23242a" height=720>
 
-### Change ID screen
-![ChangeId_Random hcht](https://github.com/krakos01/Random_hcht/assets/62389231/0959271c-01d7-472d-be1f-6a7aab595f7f)
+<img src="https://github.com/krakos01/Random_hcht/assets/62389231/0ac5ea6e-6aec-4a93-97b0-7cd5a1f3f052" height=720>
+
+<img src="https://github.com/krakos01/Random_hcht/assets/62389231/459b6d76-6cdf-4bb7-8866-c519a0b68713" height=720>
