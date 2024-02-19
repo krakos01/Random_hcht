@@ -2,7 +2,7 @@
 
 Simple app which generates selected number of races (cars + track) with options that allow to adjust it to your needs.
 
-<sup>Click flag to open options</sup>
+Click flag to open options<
 
 ### Screenshots
 <img src="https://github.com/krakos01/Random_hcht/assets/62389231/913729da-4ee7-4df7-bd96-cd694a23242a" height=720>
